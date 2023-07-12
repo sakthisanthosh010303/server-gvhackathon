@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Sussy Bakas - First Responders List{% endblock %}
+
+{% block content %}
+<h2 class="text-center">First Responders List</h2>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success mx-auto text-center" role="alert" style="max-width: 500px;">
+  <h4>Success</h4><hr>
+  <div>{{ message }}</div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% if responders %}
+<table class="table table-bordered table-responsive-md table-striped">
+  <thead class="thead-dark">
+    <th>Sign #</th>
+    <th>Full Name</th>
+    <th>Email ID</th>
+    <th>Phone Number</th>
+    <th>Responder Type</th>
+    <th colspan="2">Actions</th>
+  </thead>
+  <tbody>
+  {% for responder in responders %}
+  <tr>
+    <td>{{ responder.guid }}</td>
+    <td>{{ responder.first_name }} {{ responder.last_name }}</td>
+    <td>{{ responder.email_id }}</td>
+    <td>{{ responder.phone }}</td>
+    <td>
+    {% if responder.fr_type == 'VG' %}
+      Villager
+    {% else %}
+      Forest Officer
+    {% endif %}
+    </td>
+    <td>
+      <a class="btn btn-warning" href="{{ url_for('update_responder_handle', guid=responder.guid) }}">Update</a>
+    </td>
+    <td>
+      <a class="btn btn-danger" href="{{ url_for('remove_responder_handle', guid=responder.guid) }}">Remove</a>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-danger mx-auto text-center" role="alert" style="max-width: 500px;">
+  <h4>No Responders Found</h4><hr>
+  <div>To add a responder, click the "Add Responder" button.</div>
+</div>
+{% endif %}
+<div class="text-center m-2">
+  <a class="btn btn-primary" href="{{ url_for('add_responder_handle') }}">Add Responder<a>
+</div>
+{% endblock %}

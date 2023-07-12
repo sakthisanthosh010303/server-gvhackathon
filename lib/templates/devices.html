@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Sussy Bakas - Devices List{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Devices List</h2>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert alert-success mx-auto text-center" role="alert" style="max-width: 500px;">
+  <h4>Success</h4><hr>
+  <div>{{ message }}</div>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+{% if devices %}
+<table class="table table-bordered table-responsive-md table-striped">
+  <thead class="thead-dark">
+    <th>Sign #</th>
+    <th>Device ID</th>
+    <th>Name</th>
+    <th>Last Updated</th>
+    <th colspan="3">Actions</th>
+  </thead>
+  <tbody>
+  {% for device in devices %}
+  <tr>
+    <td>{{ device.guid }}</td>
+    <td>{{ device.device_id }}</td>
+    <td>{{ device.name }}</td>
+    <td>{{ device.last_updated }}</td>
+    <td><a class="btn btn-warning" href="{{ url_for('update_device_handle', guid=device.guid) }}">Update</a></td>
+    <td><a class="btn btn-danger" href="{{ url_for('remove_device_handle', guid=device.guid) }}">Remove</a></td>
+    <td><a class="btn btn-primary" href="{{ maps_link }}{{ device.latitude }},{{ device.longitude }}">View in Map</a></td>
+    </td>
+  </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<div class="alert alert-danger mx-auto text-center" role="alert" style="max-width: 500px;">
+  <h4>No Devices Found</h4><hr>
+  <div>To add a device, click the "Add Device" button.</div>
+</div>
+{% endif %}
+<div class="text-center m-2">
+  <a class="btn btn-primary" href="{{ url_for('add_device_handle') }}">Add Device<a>
+</div>
+{% endblock %}

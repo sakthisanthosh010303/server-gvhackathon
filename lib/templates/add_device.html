@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Sussy Bakas - Add Device{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Add Device</h2>
+<form
+  class="bg-light border rounded mx-auto p-4"
+  method="POST"
+  action="{{ url_for('add_device_handle') }}"
+  style="max-width: 600px;"
+>
+  {{ form.csrf_token }}
+  <div class="form-group">
+    <b>{{ form.name.label }}</b>
+    {{ form.name(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.latitude.label }}</b>
+    {{ form.latitude(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.longitude.label }}</b>
+    {{ form.longitude(size=20, class='form-control') }}
+  </div>
+  {{ form.submit(class='btn btn-primary') }}
+</form>
+{% endblock %}

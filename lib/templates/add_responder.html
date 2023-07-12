@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Sussy Bakas - Add Responder{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Add Responder</h2>
+<form class="bg-light border rounded mx-auto p-4" method="POST" action="{{ url_for('add_responder_handle') }}" style="max-width: 600px;">
+  {{ form.csrf_token }}
+  <div class="form-group">
+    <b>{{ form.first_name.label }}</b>
+    {{ form.first_name(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.last_name.label }}</b>
+    {{ form.last_name(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.email_id.label }}</b>
+    {{ form.email_id(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.phone.label }}</b>
+    {{ form.phone(size=20, class='form-control') }}
+  </div>
+  <div class="form-group">
+    <b>{{ form.fr_type.label }}</b>
+    {% for field in form.fr_type %}<br>
+    {{ field() }}
+    {{ field.label }}
+    {% endfor %}<hr>
+  </div>
+  {{ form.submit(class='btn btn-primary') }}
+</form>
+{% endblock %}

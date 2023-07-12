@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Sussy Bakas - Live Feed{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Live Feed</h2>
+<div class="alert alert-primary mx-auto text-center" id="placeholder" role="alert" style="max-width: 500px;">
+  <h4>Waiting for Data</h4><hr>
+  <div>Fetching data from the server. Thank you for your patience.</div>
+</div>
+<div class="d-flex justify-content-center mb-2">
+  <img class="img-fluid" id="image-data" style="width: 600px;">
+</div>
+<div class="text-center font-italic" id="image-description"></div>
+<h2 class="text-center">Logs</h2>
+<table class="table table-bordered table-responsive-md table-striped">
+  <thead class="thead-dark">
+    <th>Sign #</th>
+    <th>Date and Time</th>
+    <th>Device ID</th>
+    <th>Animal Class</th>
+    <th>Actions</th>
+  </thead>
+  <tbody id="table-body">
+  <tbody>
+</table>
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}
